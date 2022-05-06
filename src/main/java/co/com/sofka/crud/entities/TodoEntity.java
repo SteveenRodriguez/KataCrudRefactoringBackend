@@ -1,13 +1,6 @@
-package co.com.sofka.crud.entity;
+package co.com.sofka.crud.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 public class TodoEntity {
@@ -21,9 +14,13 @@ public class TodoEntity {
     @Column(nullable = false)
     private boolean completed;
 
+    //Muchos toDos para una lista (Entities asociadas)
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_list")
+    @JoinColumn(name = "id_list") // Enlaza la entidad toDos a una lista usando su id
     private ListEntity list;
+
+
+    //Constructores
 
     public TodoEntity() {
     }
@@ -34,6 +31,8 @@ public class TodoEntity {
         this.completed = completed;
         this.list = list;
     }
+
+    //Getters y setters
 
     public Long getId() {
         return id;
