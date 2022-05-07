@@ -49,7 +49,7 @@ public class ToDoListController {
             TodoEntity newToDo= todoService.updateTodo(id, todo);
             return new ResponseEntity<>(newToDo, HttpStatus.OK);
         } catch (Exception e){
-            System.out.println("No se puede cambiar la lista");
+            System.out.println("No se puede cambiar todo");
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }

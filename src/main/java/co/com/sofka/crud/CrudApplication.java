@@ -20,7 +20,7 @@ public class CrudApplication {
 		return new ModelMapper();
 	}
 
-	//configuramos nues Cors
+	//configuramos nuestro Cors
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {

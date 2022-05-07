@@ -1,5 +1,12 @@
 package co.com.sofka.crud.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +16,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+@Setter
+@Getter
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class TodoEntity {
     @Id
@@ -26,21 +38,9 @@ public class TodoEntity {
     @JoinColumn(name = "id_list") // Enlaza la entidad toDos a una lista usando su id
     private ListEntity list;
 
-
-    //Constructores
-    public TodoEntity() {
-    }
-
-    public TodoEntity(Long id, String name, boolean completed, ListEntity list) {
-        this.id = id;
-        this.name = name;
-        this.completed = completed;
-        this.list = list;
-    }
-
     //Getters y setters
 
-    public Long getId() {
+    /*public Long getId() {
         return id;
     }
 
@@ -70,5 +70,5 @@ public class TodoEntity {
 
     public void setList(ListEntity list) {
         this.list = list;
-    }
+    }*/
 }

@@ -19,7 +19,7 @@ public class TodoService {
     @Autowired
     TodoRepository todoRepository;
 
-    //libreria para mapear de un tipo object a otro tipo object
+    //librería para mapear de un tipo object a otro tipo object
     @Autowired
     ModelMapper mapper;
 
