@@ -13,10 +13,14 @@ public class CrudApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CrudApplication.class, args);
 	}
+
+	//para utilizar nuestro ModelMapper
 	@Bean
 	public ModelMapper modelMapper(){
 		return new ModelMapper();
 	}
+
+	//configuramos nues Cors
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
