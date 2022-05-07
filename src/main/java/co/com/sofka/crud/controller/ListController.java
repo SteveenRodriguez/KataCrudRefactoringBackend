@@ -1,13 +1,19 @@
 package co.com.sofka.crud.controller;
 
 import co.com.sofka.crud.entities.ListEntity;
-import co.com.sofka.crud.entities.TodoEntity;
-import co.com.sofka.crud.repository.ListRepository;
 import co.com.sofka.crud.service.ListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +25,6 @@ public class ListController {
 
     @Autowired
     ListService listservice;
-
 
     //Obtenemos todas las listas
     @GetMapping(value = "/list")
@@ -44,8 +49,9 @@ public class ListController {
 
     //Guardar lista
     @PostMapping(value = "/list")
+    //manejamos la respuesta HTTP y RequestBody sirve para deserializar un objeto
     public ResponseEntity<ListEntity> saveList(@RequestBody ListEntity list){
-        try{
+        try {
             ListEntity newList= listservice.saveList(list);
             return new ResponseEntity<>(newList, HttpStatus.CREATED);
         } catch(Exception err){

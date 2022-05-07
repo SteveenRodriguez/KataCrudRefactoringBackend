@@ -30,11 +30,9 @@ public class ListService {
 
     //Metodo para eliminar listas por id
     public void deleteListById(Long id){
-        Optional<ListEntity> currentList = listRepository.findById(id);
-
+        Optional<ListEntity> currentList = listRepository.findById(id); // se comporta como wraper evitamos que el método nos devuelva null
         if(currentList.isPresent()){
             ListEntity _currentlist = currentList.get();
-            System.out.println("lista encontrada");
             listRepository.delete(_currentlist);
         }else {
             throw new RuntimeException("No existe lista para borrar");
@@ -44,7 +42,6 @@ public class ListService {
     //Metodo para actualizar lista por id
     public ListEntity updateList(Long id, ListEntity list){
         Optional<ListEntity> currentList = listRepository.findById(id);
-
         if(currentList.isPresent()){
             ListEntity _list = currentList.get();
             _list.setName(list.getName());
