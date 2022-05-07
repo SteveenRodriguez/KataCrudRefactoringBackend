@@ -15,30 +15,33 @@ import java.util.stream.Collectors;
 @Service
 public class TodoService {
 
+    //inyectamos interface TodoRepository
     @Autowired
     TodoRepository todoRepository;
 
+    //libreria para mapear de un tipo object a otro tipo object
     @Autowired
     ModelMapper mapper;
 
     //Metodo para obtener todos los toDos mediante el DTO
     public List<ToDoListDTO> getAllTodosWithList(){
         return todoRepository.findAll().
-                stream().
-                map(this::convertEntityToDto).
-                collect(Collectors.toList());
+                stream(). //permite usar map
+                map(this::convertEntityToDto). //referencia de método
+                collect(Collectors.toList()); //recopilamos los datos
     }
 
+    //convertimos los toDos a una lista de ToDos DTO
     private ToDoListDTO convertEntityToDto(TodoEntity todo){
-        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
-        ToDoListDTO todoDto = new ToDoListDTO();
-        todoDto = mapper.map(todo, ToDoListDTO.class);
+        mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);//permite coincidir solo la última propiedad de jerarquía
+        ToDoListDTO todoDto = new ToDoListDTO(); //creamos nuestro DTO
+        todoDto = mapper.map(todo, ToDoListDTO.class); //plantilla de creación de objetos
         return todoDto;
     }
 
 
     //Guardar toDos usando DTO
-    public ToDoListDTO saveToDo(ToDoListDTO todo){
+    public ToDoListDTO saveToDo(ToDoListDTO todo) {
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         TodoEntity todoEnt = new TodoEntity();
         todoEnt = mapper.map(todo, TodoEntity.class);
@@ -89,5 +92,4 @@ public class TodoService {
             throw new RuntimeException("No existe el todo a eliminar");
         }
     }
-
 }

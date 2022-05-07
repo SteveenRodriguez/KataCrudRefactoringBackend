@@ -1,27 +1,33 @@
 package co.com.sofka.crud.entities;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class TodoEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)  //permite generar automáticamente el ID
     private Long id;
-
-    @Column(nullable = false, unique = true)
+    //unique: Creará una restricción en la tabla para que el valor de esa columna sea única
+    @Column(nullable = false, unique = true) //nullable: Crea una restricción en la tabla (Not Null) para impedir que se inserten valores nulos.
     private String name;
 
     @Column(nullable = false)
     private boolean completed;
 
     //Muchos toDos para una lista (Entities asociadas)
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER) //devuelve toda la información disponible
     @JoinColumn(name = "id_list") // Enlaza la entidad toDos a una lista usando su id
     private ListEntity list;
 
 
     //Constructores
-
     public TodoEntity() {
     }
 
@@ -64,17 +70,5 @@ public class TodoEntity {
 
     public void setList(ListEntity list) {
         this.list = list;
-    }
-
-    //ToString
-
-    @Override
-    public String toString() {
-        return "TodoEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", completed=" + completed +
-                ", list=" + list +
-                '}';
     }
 }
