@@ -2,7 +2,7 @@ package co.com.sofka.crud.service;
 
 import co.com.sofka.crud.dto.ToDoListDTO;
 import co.com.sofka.crud.entities.TodoEntity;
-import co.com.sofka.crud.repository.TodoRepository;
+import co.com.sofka.crud.repository.ITodoRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class TodoService {
 
     //inyectamos interface TodoRepository
     @Autowired
-    TodoRepository todoRepository;
+    ITodoRepository todoRepository;
 
     //librería para mapear de un tipo object a otro tipo object
     @Autowired

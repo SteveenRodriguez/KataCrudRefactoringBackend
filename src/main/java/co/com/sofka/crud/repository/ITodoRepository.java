@@ -4,7 +4,10 @@ import co.com.sofka.crud.entities.TodoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-//interface que proporciona funciones CRUD (PagingAndSortingRepository )
+/**
+ * interface that provides CRUD functions (PagingAndSortingRepository )
+ * @author Steveen Rodriguez
+ */
 @Repository
-public interface TodoRepository extends JpaRepository<TodoEntity, Long> {
+public interface ITodoRepository extends JpaRepository<TodoEntity, Long> {
 }

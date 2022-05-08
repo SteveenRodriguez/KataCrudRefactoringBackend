@@ -1,7 +1,7 @@
 package co.com.sofka.crud.service;
 
 import co.com.sofka.crud.entities.ListEntity;
-import co.com.sofka.crud.repository.ListRepository;
+import co.com.sofka.crud.repository.IListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.Optional;
 public class ListService {
     //inyectamos la interface ListRepository
     @Autowired
-    ListRepository listRepository;
+    IListRepository listRepository;
 
     //Metodo para obtener todas las listas
     public ArrayList<ListEntity> getAllList(){

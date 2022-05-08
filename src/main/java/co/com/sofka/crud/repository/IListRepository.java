@@ -4,8 +4,11 @@ import co.com.sofka.crud.entities.ListEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-//interface que proporciona funciones CRUD (PagingAndSortingRepository )
+/**
+ * interface that provides CRUD functions (PagingAndSortingRepository )
+ * @author Steveen Rodriguez
+ */
 @Repository
-public interface ListRepository extends JpaRepository<ListEntity, Long> {
+public interface IListRepository extends JpaRepository<ListEntity, Long> {
 
 }
