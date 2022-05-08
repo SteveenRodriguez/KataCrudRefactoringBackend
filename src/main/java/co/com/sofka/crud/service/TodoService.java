@@ -12,26 +12,41 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * To Do services class
+ * @author Steveen Rodriguez
+ */
 @Service
 public class TodoService {
 
-    //inyectamos interface TodoRepository
+    /**
+     * injection of the ITodoRepository interface
+     */
     @Autowired
     ITodoRepository todoRepository;
 
-    //librería para mapear de un tipo object a otro tipo object
+    /**
+     * ModelMapper injection
+     */
     @Autowired
     ModelMapper mapper;
 
-    //Metodo para obtener todos los toDos mediante el DTO
+    /**
+     * Method to obtain all the toDos through the DTO
+     * @return todoRepository
+     */
     public List<ToDoListDTO> getAllTodosWithList(){
         return todoRepository.findAll().
-                stream(). //permite usar map
-                map(this::convertEntityToDto). //referencia de método
-                collect(Collectors.toList()); //recopilamos los datos
+                stream().
+                map(this::convertEntityToDto). //method reference
+                collect(Collectors.toList());
     }
 
-    //convertimos los toDos a una lista de ToDos DTO
+    /**
+     * we convert the toDos to a list of ToDos DTOs
+     * @param todo
+     * @return todoDto
+     */
     private ToDoListDTO convertEntityToDto(TodoEntity todo){
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);//permite coincidir solo la última propiedad de jerarquía
         ToDoListDTO todoDto = new ToDoListDTO(); //creamos nuestro DTO
@@ -40,7 +55,11 @@ public class TodoService {
     }
 
 
-    //Guardar toDos usando DTO
+    /**
+     * method to Save allDos using DTO
+     * @param todo
+     * @return mapper
+     */
     public ToDoListDTO saveToDo(ToDoListDTO todo) {
         mapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
         TodoEntity todoEnt = new TodoEntity();
@@ -62,7 +81,12 @@ public class TodoService {
         }
     }
 
-    //Metodo para actualizar toDos por id
+    /**
+     * Method to get toDos by id
+     * @param id
+     * @param todo
+     * @return list
+     */
     public TodoEntity updateTodo(long id, TodoEntity todo){
         Optional<TodoEntity> currentTodo = todoRepository.findById(id);
 
@@ -81,7 +105,11 @@ public class TodoService {
     }
 
 
-    //Metodo para eliminar toDos por id
+    /**
+     * Method to remove allDos by id
+     * @param id
+     * @return list
+     */
     public String deleteToDoById(Long id){
         Optional<TodoEntity> currentTodoById = todoRepository.findById(id);
         if (currentTodoById.isPresent()){
