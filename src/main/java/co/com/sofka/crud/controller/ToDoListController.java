@@ -17,21 +17,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
+/**
+ * handler for the ToDoList
+ * @author Steveen
+ */
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api")
 public class ToDoListController {
 
+    /**
+     * injection of the TodoService
+     */
     @Autowired
     private TodoService todoService;
 
-    //Obtener los toDos con DTO
+    /**
+     * Get the all with DTO
+     * @return todoService
+     */
     @GetMapping(value = "/todos")
     public List<ToDoListDTO> getAllTodoS(){
         return todoService.getAllTodosWithList();
     }
 
-    //Guardar toDos usando DTO
+    /**
+     * Save ToDos using DTO
+     * @param todo
+     * @return ResponseEntity
+     */
     @PostMapping(value = "/todo")
     public ResponseEntity<ToDoListDTO> saveToDo(@RequestBody ToDoListDTO todo ){
         try {
@@ -42,7 +56,12 @@ public class ToDoListController {
         }
     }
 
-    //Actualizar toDos por id
+    /**
+     * Update ToDos by id
+     * @param id
+     * @param todo
+     * @return ResponseEntity
+     */
     @PutMapping(value = "/todo/{id}")
     public ResponseEntity<TodoEntity> updateTodo(@PathVariable("id") long id, @RequestBody TodoEntity todo){
         try {
@@ -54,7 +73,11 @@ public class ToDoListController {
         }
     }
 
-    //Obtener toDos por id
+    /**
+     * Get ToDos by id
+     * @param id
+     * @return ResponseEntity
+     */
     @GetMapping("/todo/{id}")
     public ResponseEntity<TodoEntity> getTodobyId(@PathVariable("id") long id){
         try{
@@ -65,7 +88,11 @@ public class ToDoListController {
     }
 
 
-    //Metodo para borrar toDos por id
+    /**
+     * Method to delete all by id
+     * @param id
+     * @return ResponseEntity
+     */
     @DeleteMapping("/todo/delete/{id}")
     public ResponseEntity<String> deleteToDo(@PathVariable("id") long id){
         try {

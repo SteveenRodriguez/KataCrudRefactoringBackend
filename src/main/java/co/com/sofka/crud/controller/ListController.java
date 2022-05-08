@@ -18,15 +18,25 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * handler for the List
+ * @author Steveen
+ */
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api")
 public class ListController {
 
+    /**
+     * injection of the ListService
+     */
     @Autowired
     ListService listservice;
 
-    //Obtenemos todas las listas
+    /**
+     * get all lists
+     * @return ResponseEntity
+     */
     @GetMapping(value = "/list")
     public ResponseEntity<List<ListEntity>> getAllList() {
         List<ListEntity> allList = listservice.getAllList();
@@ -36,7 +46,11 @@ public class ListController {
         return new ResponseEntity<>(allList, HttpStatus.OK);
     }
 
-    //Buscar lista by Id
+    /**
+     * Search list by Id
+     * @param id
+     * @return ResponseEntity
+     */
     @GetMapping(value = "/list/{id}")
     public ResponseEntity<ListEntity> getListById(@PathVariable("id") Long id){
         Optional<ListEntity> listData = listservice.getListById(id);
@@ -47,7 +61,11 @@ public class ListController {
         }
     }
 
-    //Guardar lista
+    /**
+     * Save the list
+     * @param list
+     * @return ResponseEntity
+     */
     @PostMapping(value = "/list")
     //manejamos la respuesta HTTP y RequestBody sirve para deserializar un objeto
     public ResponseEntity<ListEntity> saveList(@RequestBody ListEntity list){
@@ -59,7 +77,12 @@ public class ListController {
         }
     }
 
-    //Actualizar lista por id
+    /**
+     * Update list by id
+     * @param id
+     * @param list
+     * @return ResponseEntity
+     */
     @PutMapping(value = "/list/{id}")
     public ResponseEntity<ListEntity> updateList(@PathVariable("id") long id, @RequestBody ListEntity list){
         try {
@@ -71,6 +94,11 @@ public class ListController {
         }
     }
 
+    /**
+     * deletelist by id
+     * @param id
+     * @return ResponseEntity
+     */
     @DeleteMapping(value = "list/{id}")
     public ResponseEntity<String> deleteListById(@PathVariable("id")Long id){
         try {
