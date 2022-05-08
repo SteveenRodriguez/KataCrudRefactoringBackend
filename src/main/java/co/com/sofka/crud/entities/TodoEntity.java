@@ -1,7 +1,6 @@
 package co.com.sofka.crud.entities;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,6 +15,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+/**
+ *  Class that models and creates a ToDo entity
+ * @autor Steveen Rodríguez
+ */
 @Setter
 @Getter
 @ToString
@@ -23,52 +26,34 @@ import javax.persistence.ManyToOne;
 @NoArgsConstructor
 @Entity
 public class TodoEntity {
+    /**
+     * Class id attribute
+     * @strategy: automatically generates the Id
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)  //permite generar automáticamente el ID
     private Long id;
-    //unique: Creará una restricción en la tabla para que el valor de esa columna sea única
-    @Column(nullable = false, unique = true) //nullable: Crea una restricción en la tabla (Not Null) para impedir que se inserten valores nulos.
-    private String name;
 
+    /**
+     * Class name attribute
+     * @unique: Create a constraint the table so that value of that column is unique
+     * @nullable: Create constraint on table to prevent null values from being inserted
+     */
+    @Column(nullable = false, unique = true)
+    private String name;
+    /**
+     * Class completion attribute
+     * @nullable: Create constraint on table to prevent null values from being inserted
+     */
     @Column(nullable = false)
     private boolean completed;
-
-    //Muchos toDos para una lista (Entities asociadas)
-    @ManyToOne(fetch = FetchType.EAGER) //devuelve toda la información disponible
-    @JoinColumn(name = "id_list") // Enlaza la entidad toDos a una lista usando su id
+    /**
+     * Class list attribute
+     * @ManuyToOne: Many ToDos for a list (associated entities)
+     * @fetch: returns all available information
+     * @JoinColumn: Bind the ToDos entity to a list using its id
+     */
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_list")
     private ListEntity list;
-
-    //Getters y setters
-
-    /*public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isCompleted() {
-        return completed;
-    }
-
-    public void setCompleted(boolean completed) {
-        this.completed = completed;
-    }
-
-    public ListEntity getList() {
-        return list;
-    }
-
-    public void setList(ListEntity list) {
-        this.list = list;
-    }*/
 }
